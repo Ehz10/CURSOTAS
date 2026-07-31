@@ -37,6 +37,13 @@ header {
 
     width:45px;
 }
+.logo h2 span {
+    color: #2196f3;
+    background: linear-gradient(135deg, #2196f3, #1565c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 
 main{
 
