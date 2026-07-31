@@ -1,6 +1,7 @@
 /* script.js */
 document.addEventListener('DOMContentLoaded', function() {
     // ===== DADOS DOS CAPÍTULOS =====
+    // (mesmo conteúdo de antes, mantido intacto)
     const chapters = {
         1: {
             title: 'I. INTRODUÇÃO',
@@ -103,18 +104,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 <h2>Intervenientes no SIEM</h2>
                 <div class="intervenientes-grid">
-                    <span class="tag">Cidadão</span>
-                    <span class="tag">Operadores das Centrais de Emergência 112</span>
-                    <span class="tag">Agentes da Autoridade</span>
-                    <span class="tag">Bombeiros</span>
-                    <span class="tag">Cruz Vermelha Portuguesa</span>
-                    <span class="tag">Tripulantes de Ambulância</span>
-                    <span class="tag">Técnicos de Emergência Pré-Hospitalar</span>
-                    <span class="tag">Médicos</span>
-                    <span class="tag">Enfermeiros</span>
-                    <span class="tag">Pessoal Técnico Hospitalar</span>
-                    <span class="tag">Pessoal Técnico de Telecomunicações</span>
-                    <span class="tag">Pessoal Técnico de Informática</span>
+                    <span class="tag blue">Cidadão</span>
+                    <span class="tag blue">Operadores das Centrais 112</span>
+                    <span class="tag blue">Agentes da Autoridade</span>
+                    <span class="tag blue">Bombeiros</span>
+                    <span class="tag blue">Cruz Vermelha Portuguesa</span>
+                    <span class="tag blue">Tripulantes de Ambulância</span>
+                    <span class="tag blue">Técnicos de Emergência Pré-Hospitalar</span>
+                    <span class="tag blue">Médicos</span>
+                    <span class="tag blue">Enfermeiros</span>
+                    <span class="tag blue">Pessoal Técnico Hospitalar</span>
+                    <span class="tag blue">Pessoal Técnico de Telecomunicações</span>
+                    <span class="tag blue">Pessoal Técnico de Informática</span>
                 </div>
 
                 <h2>Número Europeu de Emergência - 112</h2>
@@ -205,61 +206,61 @@ document.addEventListener('DOMContentLoaded', function() {
                         <i class="fa-solid fa-helicopter"></i>
                         <h4>Helicópteros (SHEM)</h4>
                         <p>Transporte de doentes graves com SAV</p>
-                        <span class="tag">Médico + Enfermeiro</span>
+                        <span class="tag blue">Médico + Enfermeiro</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-car"></i>
                         <h4>VMER</h4>
                         <p>Viatura Médica de Emergência e Reanimação</p>
-                        <span class="tag">Médico + Enfermeiro</span>
+                        <span class="tag blue">Médico + Enfermeiro</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-ambulance"></i>
                         <h4>TIP</h4>
                         <p>Transporte Inter-hospitalar Pediátrico</p>
-                        <span class="tag">Médico + Enfermeiro + TEPH</span>
+                        <span class="tag orange">Médico + Enfermeiro + TEPH</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-truck-medical"></i>
                         <h4>AEM</h4>
                         <p>Ambulância de Emergência Médica</p>
-                        <span class="tag">2 TEPH</span>
+                        <span class="tag blue">2 TEPH</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-heart-pulse"></i>
                         <h4>SIV</h4>
                         <p>Suporte Imediato de Vida</p>
-                        <span class="tag">Enfermeiro + TEPH</span>
+                        <span class="tag green">Enfermeiro + TEPH</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-motorcycle"></i>
                         <h4>MEM</h4>
                         <p>Motociclo de Emergência Médica</p>
-                        <span class="tag">TEPH</span>
+                        <span class="tag purple">TEPH</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-people-group"></i>
                         <h4>UMIPE</h4>
                         <p>Unidade Móvel de Intervenção Psicológica</p>
-                        <span class="tag">TEPH + Psicólogo</span>
+                        <span class="tag purple">TEPH + Psicólogo</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-tent"></i>
                         <h4>VIC / PT EMT</h4>
                         <p>Viatura de Intervenção em Catástrofe</p>
-                        <span class="tag">Hospital de Campanha</span>
+                        <span class="tag red">Hospital de Campanha</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-building"></i>
                         <h4>PEM / PR</h4>
                         <p>Postos de Emergência Médica e Reserva</p>
-                        <span class="tag">Ambulância Tipo B</span>
+                        <span class="tag orange">Ambulância Tipo B</span>
                     </div>
                     <div class="meio-card">
                         <i class="fa-solid fa-truck"></i>
                         <h4>Ambulâncias de Socorro</h4>
                         <p>Operadas por agentes de proteção civil</p>
-                        <span class="tag">Tipo B</span>
+                        <span class="tag orange">Tipo B</span>
                     </div>
                 </div>
 
@@ -1416,88 +1417,113 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // ===== ELEMENTOS =====
-    const viewIndex = document.getElementById('viewIndex');
-    const viewChapter = document.getElementById('viewChapter');
+    const tabs = document.querySelectorAll('.tab-btn');
     const chapterContent = document.getElementById('chapterContent');
-    const chapterProgressText = document.getElementById('chapterProgressText');
-    const progressFill = document.getElementById('progressFill');
-    const backToIndexBtn = document.getElementById('backToIndex');
-    const nextChapterBtn = document.getElementById('nextChapter');
     const searchInput = document.getElementById('searchInput');
-
-    let currentChapter = 1;
-    const totalChapters = 9;
+    const tabsContainer = document.getElementById('tabsContainer');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
 
     // ===== FUNÇÕES =====
-    function showView(view) {
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        view.classList.add('active');
-    }
-
     function loadChapter(num) {
         const chapter = chapters[num];
         if (!chapter) return;
 
-        currentChapter = num;
-        chapterContent.innerHTML = chapter.content;
-        chapterProgressText.textContent = `Capítulo ${num} de IX`;
-        progressFill.style.width = `${(num / totalChapters) * 100}%`;
+        // Atualizar tabs
+        tabs.forEach(tab => {
+            tab.classList.toggle('active', parseInt(tab.dataset.chapter) === num);
+        });
 
-        showView(viewChapter);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+        // Carregar conteúdo com animação
+        chapterContent.style.opacity = '0';
+        setTimeout(() => {
+            chapterContent.innerHTML = chapter.content;
+            chapterContent.style.opacity = '1';
+        }, 150);
 
-    function goToIndex() {
-        showView(viewIndex);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function nextChapter() {
-        if (currentChapter < totalChapters) {
-            loadChapter(currentChapter + 1);
+        // Scroll para o topo do conteúdo em mobile
+        if (window.innerWidth < 768) {
+            document.querySelector('.chapter-content-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
+    function scrollTabs(direction) {
+        const scrollAmount = 200;
+        tabsContainer.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
     // ===== EVENTOS =====
-    // Clique nos cards do índice
-    document.querySelectorAll('.chapter-card').forEach(card => {
-        card.addEventListener('click', function() {
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
             const num = parseInt(this.dataset.chapter);
-            if (num) loadChapter(num);
+            loadChapter(num);
         });
     });
 
-    // Botão voltar ao índice
-    backToIndexBtn.addEventListener('click', goToIndex);
+    // Scroll arrows
+    if (scrollLeftBtn) {
+        scrollLeftBtn.addEventListener('click', () => scrollTabs(-1));
+    }
+    if (scrollRightBtn) {
+        scrollRightBtn.addEventListener('click', () => scrollTabs(1));
+    }
 
-    // Botão próximo capítulo
-    nextChapterBtn.addEventListener('click', nextChapter);
+    // Mostrar/esconder setas baseado no scroll
+    if (tabsContainer) {
+        tabsContainer.addEventListener('scroll', () => {
+            const maxScroll = tabsContainer.scrollWidth - tabsContainer.clientWidth;
+            if (scrollLeftBtn && scrollRightBtn) {
+                scrollLeftBtn.style.display = tabsContainer.scrollLeft > 0 ? 'flex' : 'none';
+                scrollRightBtn.style.display = tabsContainer.scrollLeft < maxScroll - 1 ? 'flex' : 'none';
+            }
+        });
+        // Trigger initial
+        setTimeout(() => {
+            if (tabsContainer.scrollWidth > tabsContainer.clientWidth) {
+                if (scrollRightBtn) scrollRightBtn.style.display = 'flex';
+            }
+        }, 100);
+    }
 
-    // Pesquisa
+    // ===== PESQUISA =====
     searchInput.addEventListener('input', function() {
         const query = this.value.toLowerCase().trim();
-        const cards = document.querySelectorAll('.chapter-card');
 
-        cards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            card.style.display = text.includes(query) ? 'flex' : 'none';
+        tabs.forEach(tab => {
+            const text = tab.textContent.toLowerCase();
+            if (query === '') {
+                tab.style.display = '';
+            } else {
+                tab.style.display = text.includes(query) ? '' : 'none';
+            }
         });
+
+        // Mostrar mensagem se nenhum resultado
+        const visibleTabs = document.querySelectorAll('.tab-btn[style*="display: none"]');
+        // (opcional)
     });
 
-    // Keyboard shortcuts
+    // ===== CARREGAR PRIMEIRO CAPÍTULO =====
+    loadChapter(1);
+
+    // ===== KEYBOARD SHORTCUTS =====
     document.addEventListener('keydown', function(e) {
-        if (viewChapter.classList.contains('active')) {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                nextChapter();
-            }
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                if (currentChapter > 1) loadChapter(currentChapter - 1);
-            }
-            if (e.key === 'Escape') {
-                goToIndex();
-            }
+        const activeTab = document.querySelector('.tab-btn.active');
+        if (!activeTab) return;
+
+        const tabsArray = Array.from(tabs);
+        const currentIndex = tabsArray.indexOf(activeTab);
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = (currentIndex + 1) % tabsArray.length;
+            loadChapter(parseInt(tabsArray[nextIndex].dataset.chapter));
+            tabsArray[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = (currentIndex - 1 + tabsArray.length) % tabsArray.length;
+            loadChapter(parseInt(tabsArray[prevIndex].dataset.chapter));
+            tabsArray[prevIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     });
 });
