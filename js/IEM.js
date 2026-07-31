@@ -1,7 +1,6 @@
 /* script.js */
 document.addEventListener('DOMContentLoaded', function() {
     // ===== DADOS DOS CAPÍTULOS =====
-    // (mesmo conteúdo de antes, mantido intacto)
     const chapters = {
         1: {
             title: 'I. INTRODUÇÃO',
@@ -1419,7 +1418,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== ELEMENTOS =====
     const tabs = document.querySelectorAll('.tab-btn');
     const chapterContent = document.getElementById('chapterContent');
-    const searchInput = document.getElementById('searchInput');
+    const tabsWrapper = document.getElementById('tabsWrapper');
     const tabsContainer = document.getElementById('tabsContainer');
     const scrollLeftBtn = document.getElementById('scrollLeft');
     const scrollRightBtn = document.getElementById('scrollRight');
@@ -1448,19 +1447,62 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function scrollTabs(direction) {
-        const scrollAmount = 200;
-        tabsContainer.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        const scrollAmount = tabsContainer.clientWidth * 0.6;
+        tabsContainer.scrollBy({ 
+            left: direction * scrollAmount, 
+            behavior: 'smooth' 
+        });
+    }
+
+    function checkOverflow() {
+        if (!tabsContainer || !tabsWrapper) return;
+        
+        const hasOverflow = tabsContainer.scrollWidth > tabsContainer.clientWidth;
+        tabsWrapper.classList.toggle('has-overflow', hasOverflow);
+        
+        if (scrollLeftBtn && scrollRightBtn) {
+            const maxScroll = tabsContainer.scrollWidth - tabsContainer.clientWidth;
+            const atStart = tabsContainer.scrollLeft <= 5;
+            const atEnd = tabsContainer.scrollLeft >= maxScroll - 5;
+            
+            if (window.innerWidth > 768) {
+                scrollLeftBtn.style.display = (hasOverflow && !atStart) ? 'flex' : 'none';
+                scrollRightBtn.style.display = (hasOverflow && !atEnd) ? 'flex' : 'none';
+            } else {
+                scrollLeftBtn.style.display = 'flex';
+                scrollRightBtn.style.display = 'flex';
+            }
+        }
+    }
+
+    function scrollToTab(tab) {
+        if (!tabsContainer || !tab) return;
+        
+        const containerRect = tabsContainer.getBoundingClientRect();
+        const tabRect = tab.getBoundingClientRect();
+        
+        const isVisible = (
+            tabRect.left >= containerRect.left &&
+            tabRect.right <= containerRect.right
+        );
+        
+        if (!isVisible) {
+            const scrollAmount = tab.offsetLeft - tabsContainer.offsetLeft - 20;
+            tabsContainer.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
     }
 
     // ===== EVENTOS =====
+    // Clique nos tabs
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const num = parseInt(this.dataset.chapter);
             loadChapter(num);
+            scrollToTab(this);
         });
     });
 
-    // Scroll arrows
+    // Setas de navegação
     if (scrollLeftBtn) {
         scrollLeftBtn.addEventListener('click', () => scrollTabs(-1));
     }
@@ -1468,43 +1510,56 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollRightBtn.addEventListener('click', () => scrollTabs(1));
     }
 
-    // Mostrar/esconder setas baseado no scroll
+    // Scroll com roda do mouse (horizontal)
     if (tabsContainer) {
-        tabsContainer.addEventListener('scroll', () => {
-            const maxScroll = tabsContainer.scrollWidth - tabsContainer.clientWidth;
-            if (scrollLeftBtn && scrollRightBtn) {
-                scrollLeftBtn.style.display = tabsContainer.scrollLeft > 0 ? 'flex' : 'none';
-                scrollRightBtn.style.display = tabsContainer.scrollLeft < maxScroll - 1 ? 'flex' : 'none';
+        tabsContainer.addEventListener('wheel', function(e) {
+            if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                e.preventDefault();
+                const scrollAmount = e.deltaX || e.deltaY;
+                this.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             }
+        }, { passive: false });
+
+        // Drag to scroll
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+
+        tabsContainer.addEventListener('mousedown', function(e) {
+            if (e.target.closest('.tab-btn')) return;
+            isDown = true;
+            this.style.cursor = 'grabbing';
+            startX = e.pageX - this.offsetLeft;
+            scrollLeft = this.scrollLeft;
         });
-        // Trigger initial
-        setTimeout(() => {
-            if (tabsContainer.scrollWidth > tabsContainer.clientWidth) {
-                if (scrollRightBtn) scrollRightBtn.style.display = 'flex';
-            }
-        }, 100);
+
+        tabsContainer.addEventListener('mouseleave', function() {
+            isDown = false;
+            this.style.cursor = 'grab';
+        });
+
+        tabsContainer.addEventListener('mouseup', function() {
+            isDown = false;
+            this.style.cursor = 'grab';
+        });
+
+        tabsContainer.addEventListener('mousemove', function(e) {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - this.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            this.scrollLeft = scrollLeft - walk;
+        });
+
+        // Atualizar overflow
+        tabsContainer.addEventListener('scroll', checkOverflow);
     }
 
-    // ===== PESQUISA =====
-    searchInput.addEventListener('input', function() {
-        const query = this.value.toLowerCase().trim();
-
-        tabs.forEach(tab => {
-            const text = tab.textContent.toLowerCase();
-            if (query === '') {
-                tab.style.display = '';
-            } else {
-                tab.style.display = text.includes(query) ? '' : 'none';
-            }
-        });
-
-        // Mostrar mensagem se nenhum resultado
-        const visibleTabs = document.querySelectorAll('.tab-btn[style*="display: none"]');
-        // (opcional)
+    // Resize
+    window.addEventListener('resize', checkOverflow);
+    window.addEventListener('load', function() {
+        setTimeout(checkOverflow, 300);
     });
-
-    // ===== CARREGAR PRIMEIRO CAPÍTULO =====
-    loadChapter(1);
 
     // ===== KEYBOARD SHORTCUTS =====
     document.addEventListener('keydown', function(e) {
@@ -1518,12 +1573,16 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const nextIndex = (currentIndex + 1) % tabsArray.length;
             loadChapter(parseInt(tabsArray[nextIndex].dataset.chapter));
-            tabsArray[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            scrollToTab(tabsArray[nextIndex]);
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
             const prevIndex = (currentIndex - 1 + tabsArray.length) % tabsArray.length;
             loadChapter(parseInt(tabsArray[prevIndex].dataset.chapter));
-            tabsArray[prevIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            scrollToTab(tabsArray[prevIndex]);
         }
     });
+
+    // ===== CARREGAR PRIMEIRO CAPÍTULO =====
+    loadChapter(1);
+    setTimeout(checkOverflow, 200);
 });

@@ -14,21 +14,18 @@
 
 <header>
     <div class="logo">
-        <div class="logo-icon">
-            <i class="fa-solid fa-heart-pulse"></i>
-        </div>
+
+        <img src="assets/logo.png" alt="Logo">
+
         <h2>Estudo <span>TAS</span></h2>
-    </div>
-    <div class="search">
-        <input type="text" id="searchInput" placeholder="Pesquisar capítulo...">
-        <i class="fa-solid fa-magnifying-glass"></i>
+
     </div>
 </header>
 
 <main>
     <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb">
-        <a href="../index.html"><i class="fa-solid fa-house"></i> Início</a>
+        <a href="index.html"><i class="fa-solid fa-house"></i> Início</a>
         <span class="separator">/</span>
         <span class="current">Introdução à Emergência Pré-hospitalar</span>
     </div>
@@ -51,9 +48,10 @@
     </div>
 
     <!-- ===== TABS (CAPÍTULOS) ===== -->
-    <div class="tabs-wrapper">
+    <div class="tabs-wrapper" id="tabsWrapper">
         <div class="tabs-header">
-            <div class="tabs-indicator" id="tabsIndicator"></div>
+            <div class="tabs-scroll-indicators left"></div>
+            <div class="tabs-scroll-indicators right"></div>
             <div class="tabs-container" id="tabsContainer">
                 <button class="tab-btn active" data-chapter="1">
                     <span class="tab-icon"><i class="fa-solid fa-1"></i></span>
@@ -101,10 +99,12 @@
                     <span class="tab-badge">IX</span>
                 </button>
             </div>
-        </div>
-        <div class="tabs-nav-arrows">
-            <button class="nav-arrow" id="scrollLeft"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="nav-arrow" id="scrollRight"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="tabs-nav-arrows left">
+                <button class="nav-arrow" id="scrollLeft"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+            <div class="tabs-nav-arrows">
+                <button class="nav-arrow" id="scrollRight"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </div>
     </div>
 

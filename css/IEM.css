@@ -28,29 +28,16 @@ header {
     border-bottom: 2px solid rgba(33, 150, 243, .06);
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.logo-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #2196f3, #1565c0);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 22px;
-    box-shadow: 0 4px 12px rgba(33, 150, 243, .3);
-}
+.logo img{
 
-.logo h2 {
-    font-size: 20px;
-    font-weight: 800;
-    color: #1a2a3a;
+    width:45px;
 }
 
 .logo h2 span {
@@ -58,39 +45,6 @@ header {
     background: linear-gradient(135deg, #2196f3, #1565c0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-.search {
-    position: relative;
-}
-
-.search input {
-    width: 280px;
-    padding: 10px 44px 10px 18px;
-    border: 2px solid #e8ecf2;
-    border-radius: 12px;
-    background: white;
-    font-size: 14px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.search input:focus {
-    border-color: #2196f3;
-    box-shadow: 0 0 0 4px rgba(33, 150, 243, .1);
-}
-
-.search i {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #999;
-    transition: 0.3s;
-}
-
-.search input:focus + i {
-    color: #2196f3;
 }
 
 /* ===== MAIN ===== */
@@ -226,10 +180,37 @@ main {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    cursor: grab;
+    user-select: none;
+}
+
+.tabs-container:active {
+    cursor: grabbing;
 }
 
 .tabs-container::-webkit-scrollbar {
-    height: 0;
+    height: 4px;
+}
+
+.tabs-container::-webkit-scrollbar-track {
+    background: #f0f4f9;
+    border-radius: 4px;
+}
+
+.tabs-container::-webkit-scrollbar-thumb {
+    background: #bbdefb;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.tabs-container::-webkit-scrollbar-thumb:hover {
+    background: #2196f3;
+}
+
+/* Scrollbar para Firefox */
+.tabs-container {
+    scrollbar-width: thin;
+    scrollbar-color: #bbdefb #f0f4f9;
 }
 
 .tab-btn {
@@ -249,6 +230,7 @@ main {
     white-space: nowrap;
     position: relative;
     flex-shrink: 0;
+    min-width: fit-content;
 }
 
 .tab-btn .tab-icon {
@@ -320,6 +302,7 @@ main {
     background: linear-gradient(135deg, #2c3e50, #1a252f);
 }
 
+/* ===== TABS NAV ARROWS ===== */
 .tabs-nav-arrows {
     position: absolute;
     top: 50%;
@@ -331,7 +314,11 @@ main {
     padding: 4px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
-    display: none;
+}
+
+.tabs-nav-arrows.left {
+    right: auto;
+    left: 8px;
 }
 
 .nav-arrow {
@@ -346,17 +333,65 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
 }
 
 .nav-arrow:hover {
     background: #2196f3;
     color: white;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, .3);
 }
 
-/* Mostrar setas apenas em mobile */
+/* Esconder setas quando não necessário em desktop */
+@media (min-width: 769px) {
+    .tabs-nav-arrows {
+        display: none;
+    }
+
+    .tabs-wrapper.has-overflow .tabs-nav-arrows {
+        display: flex;
+    }
+}
+
+/* Mostrar setas em mobile */
 @media (max-width: 768px) {
     .tabs-nav-arrows {
         display: flex;
+    }
+
+    .tabs-nav-arrows.left {
+        display: flex;
+    }
+}
+
+/* ===== SCROLL INDICATORS ===== */
+.tabs-scroll-indicators {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.tabs-scroll-indicators.left {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.9), transparent);
+}
+
+.tabs-scroll-indicators.right {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+}
+
+.tabs-wrapper.has-overflow .tabs-scroll-indicators {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .tabs-scroll-indicators {
+        display: none !important;
     }
 }
 
@@ -1183,10 +1218,6 @@ main {
         padding: 14px 5%;
     }
 
-    .search input {
-        width: 100%;
-    }
-
     main {
         width: 95%;
         margin: 16px auto;
@@ -1369,4 +1400,4 @@ main {
     .tab-btn .tab-icon {
         font-size: 14px;
     }
-}
+} 
