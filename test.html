@@ -1,0 +1,132 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução à Emergência Pré-hospitalar - Estudo TAS</title>
+    <link rel="stylesheet" href="css/IEM.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+        <h2>Estudo <span>TAS</span></h2>
+    </div>
+    <div class="search">
+        <input type="text" id="searchInput" placeholder="Pesquisar capítulo...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+</header>
+
+<main>
+    <!-- ===== VIEW: ÍNDICE ===== -->
+    <div id="viewIndex" class="view active">
+        <div class="chapter-header">
+            <a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Voltar aos Manuais</a>
+            <h1>Introdução à Emergência Pré-hospitalar</h1>
+            <p class="chapter-subtitle">Manual TAS · 9 capítulos</p>
+        </div>
+
+        <div class="chapter-grid" id="chapterGrid">
+            <div class="chapter-card" data-chapter="1">
+                <span class="chapter-number">I</span>
+                <div class="chapter-info">
+                    <h3>Introdução</h3>
+                    <p>Bem-vindo ao manual</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="2">
+                <span class="chapter-number">II</span>
+                <div class="chapter-info">
+                    <h3>Sistema Integrado de Emergência Médica</h3>
+                    <p>SIEM, fases, intervenientes</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="3">
+                <span class="chapter-number">III</span>
+                <div class="chapter-info">
+                    <h3>Ética e Aspetos Legais</h3>
+                    <p>Direitos, deveres, consentimento</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="4">
+                <span class="chapter-number">IV</span>
+                <div class="chapter-info">
+                    <h3>Anatomia e Fisiologia</h3>
+                    <p>Sistemas do corpo humano</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="5">
+                <span class="chapter-number">V</span>
+                <div class="chapter-info">
+                    <h3>Higiene e Segurança</h3>
+                    <p>Controlo de infeção, EPI</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="6">
+                <span class="chapter-number">VI</span>
+                <div class="chapter-info">
+                    <h3>Segurança do Doente</h3>
+                    <p>Identificação, quedas, ISBAR</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="7">
+                <span class="chapter-number">VII</span>
+                <div class="chapter-info">
+                    <h3>Aspetos Ergonómicos</h3>
+                    <p>LMERT, boas práticas</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="8">
+                <span class="chapter-number">VIII</span>
+                <div class="chapter-info">
+                    <h3>Comunicações Rádio</h3>
+                    <p>Procedimentos, SIRESP</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="chapter-card" data-chapter="9">
+                <span class="chapter-number">IX</span>
+                <div class="chapter-info">
+                    <h3>Siglas e Referências</h3>
+                    <p>Glossário e bibliografia</p>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== VIEW: CAPÍTULO ===== -->
+    <div id="viewChapter" class="view">
+        <div class="chapter-nav">
+            <button class="nav-link" id="backToIndex"><i class="fa-solid fa-arrow-left"></i> Índice</button>
+            <div class="chapter-progress">
+                <span id="chapterProgressText">Capítulo I de IX</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width:11%"></div>
+                </div>
+            </div>
+            <button class="nav-link" id="nextChapter">Próximo <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="chapter-content" id="chapterContent">
+            <!-- O conteúdo será injetado pelo JavaScript -->
+        </div>
+    </div>
+</main>
+
+<script src="js/IEM.js"></script>
+</body>
+</html>
