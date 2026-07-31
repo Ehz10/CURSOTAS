@@ -1,10 +1,10 @@
-<!-- emergencias_pediatricas.html -->
+<!-- emergencias_medicas.html - Versão corrigida -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergências Pediátricas - Estudo TAS</title>
+    <title>Emergências Médicas - Estudo TAS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -27,20 +27,20 @@
     <div class="breadcrumb">
         <a href="../index.html"><i class="fa-solid fa-house"></i> Início</a>
         <span class="separator">/</span>
-        <span class="current">Emergências Pediátricas</span>
+        <span class="current">Emergências Médicas</span>
     </div>
 
     <!-- ===== HEADER DO MANUAL ===== -->
     <div class="manual-header">
         <div class="header-content">
             <div class="header-icon">
-                <i class="fa-solid fa-baby"></i>
+                <i class="fa-solid fa-heart-pulse"></i>
             </div>
             <div>
-                <h1>Emergências Pediátricas</h1>
-                <p class="manual-subtitle"><i class="fa-regular fa-file-lines"></i> Abordagem e atuação em situações de emergência com crianças.</p>
+                <h1>Emergências Médicas</h1>
+                <p class="manual-subtitle"><i class="fa-regular fa-file-lines"></i> Reconhecimento e atuação em situações pré-hospitalares agudas.</p>
                 <div class="header-meta">
-                    <span><i class="fa-regular fa-circle-check"></i> 11 capítulos</span>
+                    <span><i class="fa-regular fa-circle-check"></i> 23 capítulos</span>
                     <span><i class="fa-regular fa-clock"></i> Manual TAS</span>
                 </div>
             </div>
@@ -55,58 +55,118 @@
             <div class="tabs-container" id="tabsContainer">
                 <button class="tab-btn active" data-chapter="1">
                     <span class="tab-icon"><i class="fa-solid fa-1"></i></span>
-                    <span class="tab-label">Introdução</span>
+                    <span class="tab-label">Anafilaxia</span>
                     <span class="tab-badge">I</span>
                 </button>
                 <button class="tab-btn" data-chapter="2">
                     <span class="tab-icon"><i class="fa-solid fa-2"></i></span>
-                    <span class="tab-label">Abordagem Pediátrica</span>
+                    <span class="tab-label">Respiratórias</span>
                     <span class="tab-badge">II</span>
                 </button>
                 <button class="tab-btn" data-chapter="3">
                     <span class="tab-icon"><i class="fa-solid fa-3"></i></span>
-                    <span class="tab-label">Alergia</span>
+                    <span class="tab-label">Asma</span>
                     <span class="tab-badge">III</span>
                 </button>
                 <button class="tab-btn" data-chapter="4">
                     <span class="tab-icon"><i class="fa-solid fa-4"></i></span>
-                    <span class="tab-label">Emerg. Respiratórias</span>
+                    <span class="tab-label">DPOC</span>
                     <span class="tab-badge">IV</span>
                 </button>
                 <button class="tab-btn" data-chapter="5">
                     <span class="tab-icon"><i class="fa-solid fa-5"></i></span>
-                    <span class="tab-label">Desidratação</span>
+                    <span class="tab-label">EAP</span>
                     <span class="tab-badge">V</span>
                 </button>
                 <button class="tab-btn" data-chapter="6">
                     <span class="tab-icon"><i class="fa-solid fa-6"></i></span>
-                    <span class="tab-label">Febre</span>
+                    <span class="tab-label">Infeção Resp.</span>
                     <span class="tab-badge">VI</span>
                 </button>
                 <button class="tab-btn" data-chapter="7">
                     <span class="tab-icon"><i class="fa-solid fa-7"></i></span>
-                    <span class="tab-label">Convulsão</span>
+                    <span class="tab-label">Pneumotórax</span>
                     <span class="tab-badge">VII</span>
                 </button>
                 <button class="tab-btn" data-chapter="8">
                     <span class="tab-icon"><i class="fa-solid fa-8"></i></span>
-                    <span class="tab-label">Sépsis Meningocócica</span>
+                    <span class="tab-label">Cardiovasculares</span>
                     <span class="tab-badge">VIII</span>
                 </button>
                 <button class="tab-btn" data-chapter="9">
                     <span class="tab-icon"><i class="fa-solid fa-9"></i></span>
-                    <span class="tab-label">Hipoglicemia</span>
+                    <span class="tab-label">Dor Torácica</span>
                     <span class="tab-badge">IX</span>
                 </button>
                 <button class="tab-btn" data-chapter="10">
                     <span class="tab-icon"><i class="fa-solid fa-10"></i></span>
-                    <span class="tab-label">Intoxicação</span>
+                    <span class="tab-label">Dissecção Aorta</span>
                     <span class="tab-badge">X</span>
                 </button>
                 <button class="tab-btn" data-chapter="11">
                     <span class="tab-icon"><i class="fa-solid fa-11"></i></span>
-                    <span class="tab-label">Reanimação</span>
+                    <span class="tab-label">Dist. GI</span>
                     <span class="tab-badge">XI</span>
+                </button>
+                <button class="tab-btn" data-chapter="12">
+                    <span class="tab-icon"><i class="fa-solid fa-12"></i></span>
+                    <span class="tab-label">Hemorragia Digestiva</span>
+                    <span class="tab-badge">XII</span>
+                </button>
+                <button class="tab-btn" data-chapter="13">
+                    <span class="tab-icon"><i class="fa-solid fa-13"></i></span>
+                    <span class="tab-label">Dor Abdominal</span>
+                    <span class="tab-badge">XIII</span>
+                </button>
+                <button class="tab-btn" data-chapter="14">
+                    <span class="tab-icon"><i class="fa-solid fa-14"></i></span>
+                    <span class="tab-label">Neurológicas</span>
+                    <span class="tab-badge">XIV</span>
+                </button>
+                <button class="tab-btn" data-chapter="15">
+                    <span class="tab-icon"><i class="fa-solid fa-15"></i></span>
+                    <span class="tab-label">Síncope</span>
+                    <span class="tab-badge">XV</span>
+                </button>
+                <button class="tab-btn" data-chapter="16">
+                    <span class="tab-icon"><i class="fa-solid fa-16"></i></span>
+                    <span class="tab-label">Convulsão</span>
+                    <span class="tab-badge">XVI</span>
+                </button>
+                <button class="tab-btn" data-chapter="17">
+                    <span class="tab-icon"><i class="fa-solid fa-17"></i></span>
+                    <span class="tab-label">AVC</span>
+                    <span class="tab-badge">XVII</span>
+                </button>
+                <button class="tab-btn" data-chapter="18">
+                    <span class="tab-icon"><i class="fa-solid fa-18"></i></span>
+                    <span class="tab-label">Diabetes</span>
+                    <span class="tab-badge">XVIII</span>
+                </button>
+                <button class="tab-btn" data-chapter="19">
+                    <span class="tab-icon"><i class="fa-solid fa-19"></i></span>
+                    <span class="tab-label">Intoxicações</span>
+                    <span class="tab-badge">XIX</span>
+                </button>
+                <button class="tab-btn" data-chapter="20">
+                    <span class="tab-icon"><i class="fa-solid fa-20"></i></span>
+                    <span class="tab-label">Sépsis</span>
+                    <span class="tab-badge">XX</span>
+                </button>
+                <button class="tab-btn" data-chapter="21">
+                    <span class="tab-icon"><i class="fa-solid fa-21"></i></span>
+                    <span class="tab-label">Choque</span>
+                    <span class="tab-badge">XXI</span>
+                </button>
+                <button class="tab-btn" data-chapter="22">
+                    <span class="tab-icon"><i class="fa-solid fa-22"></i></span>
+                    <span class="tab-label">Apoio SAV</span>
+                    <span class="tab-badge">XXII</span>
+                </button>
+                <button class="tab-btn" data-chapter="23">
+                    <span class="tab-icon"><i class="fa-solid fa-23"></i></span>
+                    <span class="tab-label">Reanimação</span>
+                    <span class="tab-badge">XXIII</span>
                 </button>
             </div>
             <div class="tabs-nav-arrows left">
@@ -139,6 +199,6 @@
     </div>
 </footer>
 
-<script src="js/EP.js"></script>
+<script src="js/EM.js"></script>
 </body>
 </html>
