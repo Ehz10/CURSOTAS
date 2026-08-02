@@ -12,38 +12,50 @@
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="logo">
-
-        <img src="assets/logo.png" alt="Logo">
-
+        <div class="logo-icon pulse-icon">
+            <img src="assets/logo.png" alt="Logo">
+        </div>
         <h2>Estudo <span>TAS</span></h2>
-
+    </div>
+    <div class="header-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Manual disponível</span>
     </div>
 </header>
 
+<!-- ===== MAIN ===== -->
 <main>
+
     <!-- ===== BREADCRUMB ===== -->
-    <div class="breadcrumb">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="index.html"><i class="fa-solid fa-house"></i> Início</a>
         <span class="separator">/</span>
         <span class="current">Emergências de Obstetrícia</span>
-    </div>
+        <span class="breadcrumb-progress">Capítulo I de III</span>
+    </nav>
 
     <!-- ===== HEADER DO MANUAL ===== -->
     <div class="manual-header">
         <div class="header-content">
-            <div class="header-icon">
+            <div class="header-icon float-icon">
                 <i class="fa-solid fa-person-pregnant"></i>
             </div>
             <div>
+                <div class="header-badge">Manual TAS</div>
                 <h1>Emergências de Obstetrícia</h1>
                 <p class="manual-subtitle"><i class="fa-regular fa-file-lines"></i> Abordagem e atuação em situações de parto e emergências obstétricas.</p>
                 <div class="header-meta">
                     <span><i class="fa-regular fa-circle-check"></i> 3 capítulos</span>
-                    <span><i class="fa-regular fa-clock"></i> Manual TAS</span>
+                    <span><i class="fa-regular fa-clock"></i> Última atualização: 2024</span>
+                    <span><i class="fa-regular fa-bookmark"></i> INEM</span>
                 </div>
             </div>
+        </div>
+        <div class="header-decoration">
+            <div class="decoration-bar"></div>
         </div>
     </div>
 
@@ -57,24 +69,24 @@
                     <span class="tab-icon"><i class="fa-solid fa-person-pregnant"></i></span>
                     <span class="tab-label">Anatomia/Fisiologia</span>
                     <span class="tab-badge">I</span>
+                    <span class="tab-tooltip">Estruturas da gravidez</span>
                 </button>
                 <button class="tab-btn" data-chapter="2">
                     <span class="tab-icon"><i class="fa-solid fa-hand-holding-heart"></i></span>
                     <span class="tab-label">Abordagem à Grávida</span>
                     <span class="tab-badge">II</span>
+                    <span class="tab-tooltip">Assistência ao parto</span>
                 </button>
                 <button class="tab-btn" data-chapter="3">
                     <span class="tab-icon"><i class="fa-solid fa-baby"></i></span>
                     <span class="tab-label">Reanimação Neonatal</span>
                     <span class="tab-badge">III</span>
+                    <span class="tab-tooltip">Cuidados ao RN</span>
                 </button>
             </div>
-            <div class="tabs-nav-arrows left">
-                <button class="nav-arrow" id="scrollLeft"><i class="fa-solid fa-chevron-left"></i></button>
-            </div>
-            <div class="tabs-nav-arrows">
-                <button class="nav-arrow" id="scrollRight"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
+        </div>
+        <div class="tabs-progress">
+            <div class="tabs-progress-bar" id="tabsProgress" style="width: 33.33%"></div>
         </div>
     </div>
 
@@ -84,8 +96,27 @@
             <!-- Injetado pelo JavaScript -->
         </div>
     </div>
+
+    <!-- ===== NAVEGAÇÃO ENTRE CAPÍTULOS ===== -->
+    <div class="chapter-navigation">
+        <button class="nav-btn nav-prev" id="prevChapter" disabled>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Anterior</span>
+        </button>
+        <div class="nav-indicator">
+            <span class="nav-dot active"></span>
+            <span class="nav-dot"></span>
+            <span class="nav-dot"></span>
+        </div>
+        <button class="nav-btn nav-next" id="nextChapter">
+            <span>Próximo</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
 </main>
 
+<!-- ===== FOOTER ===== -->
 <footer class="page-footer">
     <div class="footer-content">
         <p><i class="fa-regular fa-copyright"></i> Estudo TAS - Material de apoio à formação</p>
@@ -96,6 +127,9 @@
             <span>•</span>
             <span>Emergência Médica</span>
         </div>
+        <button class="footer-top" id="backToTop" aria-label="Voltar ao topo">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
     </div>
 </footer>
 

@@ -1,6 +1,6 @@
-/* script.js */
+/* IEM.js - Versão melhorada com navegação e drag to scroll */
 document.addEventListener('DOMContentLoaded', function() {
-    // ===== DADOS DOS CAPÍTULOS =====
+    // ===== DADOS DOS CAPÍTULOS - INTRODUÇÃO À EMERGÊNCIA PRÉ-HOSPITALAR =====
     const chapters = {
         1: {
             title: 'I. INTRODUÇÃO',
@@ -1420,72 +1420,141 @@ document.addEventListener('DOMContentLoaded', function() {
     const chapterContent = document.getElementById('chapterContent');
     const tabsWrapper = document.getElementById('tabsWrapper');
     const tabsContainer = document.getElementById('tabsContainer');
-    const scrollLeftBtn = document.getElementById('scrollLeft');
-    const scrollRightBtn = document.getElementById('scrollRight');
+    const totalChapters = Object.keys(chapters).length;
 
-    // ===== FUNÇÕES =====
+    // ===== ELEMENTOS DE NAVEGAÇÃO =====
+    const prevBtn = document.getElementById('prevChapter');
+    const nextBtn = document.getElementById('nextChapter');
+    const backToTopBtn = document.getElementById('backToTop');
+    const navDots = document.querySelectorAll('.nav-dot');
+    const progressBar = document.getElementById('tabsProgress');
+    const breadcrumbProgress = document.querySelector('.breadcrumb-progress');
+
+    let currentChapter = 1;
+
+    // ===== FUNÇÃO PARA SCROLL SUAVE AO TOPO =====
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // ===== FUNÇÃO PARA ATUALIZAR A BARRA DE PROGRESSO =====
+    function updateProgress(chapterNum) {
+        const progress = (chapterNum / totalChapters) * 100;
+        if (progressBar) {
+            progressBar.style.width = progress + '%';
+        }
+        if (breadcrumbProgress) {
+            breadcrumbProgress.textContent = `Capítulo ${chapterNum} de ${totalChapters}`;
+        }
+        navDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === chapterNum - 1);
+        });
+        if (prevBtn) prevBtn.disabled = chapterNum === 1;
+        if (nextBtn) nextBtn.disabled = chapterNum === totalChapters;
+    }
+
+    // ===== FUNÇÃO PARA CARREGAR CAPÍTULO =====
     function loadChapter(num) {
         const chapter = chapters[num];
         if (!chapter) return;
 
-        // Atualizar tabs
+        currentChapter = num;
+
         tabs.forEach(tab => {
             tab.classList.toggle('active', parseInt(tab.dataset.chapter) === num);
         });
 
-        // Carregar conteúdo com animação
         chapterContent.style.opacity = '0';
         setTimeout(() => {
             chapterContent.innerHTML = chapter.content;
             chapterContent.style.opacity = '1';
         }, 150);
 
-        // Scroll para o topo do conteúdo em mobile
-        if (window.innerWidth < 768) {
-            document.querySelector('.chapter-content-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        updateProgress(num);
+        scrollToTop();
     }
 
-    function scrollTabs(direction) {
-        const scrollAmount = tabsContainer.clientWidth * 0.6;
-        tabsContainer.scrollBy({ 
-            left: direction * scrollAmount, 
-            behavior: 'smooth' 
+    // ===== FUNÇÃO PARA SCROLL DAS TABS POR DRAG =====
+    let isDown = false;
+    let startX = 0;
+    let scrollLeftPos = 0;
+
+    function initDragScroll() {
+        if (!tabsContainer) return;
+
+        tabsContainer.addEventListener('mousedown', function(e) {
+            if (e.target.closest('.tab-btn')) return;
+            isDown = true;
+            this.style.cursor = 'grabbing';
+            startX = e.pageX - this.offsetLeft;
+            scrollLeftPos = this.scrollLeft;
+            this.style.userSelect = 'none';
         });
+
+        tabsContainer.addEventListener('mouseleave', function() {
+            isDown = false;
+            this.style.cursor = 'grab';
+            this.style.userSelect = '';
+        });
+
+        tabsContainer.addEventListener('mouseup', function() {
+            isDown = false;
+            this.style.cursor = 'grab';
+            this.style.userSelect = '';
+        });
+
+        tabsContainer.addEventListener('mousemove', function(e) {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - this.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            this.scrollLeft = scrollLeftPos - walk;
+        });
+
+        // Scroll com roda do mouse (horizontal)
+        tabsContainer.addEventListener('wheel', function(e) {
+            if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                e.preventDefault();
+                const scrollAmount = e.deltaX || e.deltaY;
+                this.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }, { passive: false });
+
+        // Touch support para mobile
+        let touchStartX = 0;
+        let touchScrollLeft = 0;
+
+        tabsContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].pageX - this.offsetLeft;
+            touchScrollLeft = this.scrollLeft;
+        }, { passive: true });
+
+        tabsContainer.addEventListener('touchmove', function(e) {
+            const touchX = e.touches[0].pageX - this.offsetLeft;
+            const walk = (touchX - touchStartX) * 1.5;
+            this.scrollLeft = touchScrollLeft - walk;
+        }, { passive: true });
     }
 
+    // ===== FUNÇÃO PARA VERIFICAR OVERFLOW DAS TABS =====
     function checkOverflow() {
         if (!tabsContainer || !tabsWrapper) return;
-        
         const hasOverflow = tabsContainer.scrollWidth > tabsContainer.clientWidth;
         tabsWrapper.classList.toggle('has-overflow', hasOverflow);
-        
-        if (scrollLeftBtn && scrollRightBtn) {
-            const maxScroll = tabsContainer.scrollWidth - tabsContainer.clientWidth;
-            const atStart = tabsContainer.scrollLeft <= 5;
-            const atEnd = tabsContainer.scrollLeft >= maxScroll - 5;
-            
-            if (window.innerWidth > 768) {
-                scrollLeftBtn.style.display = (hasOverflow && !atStart) ? 'flex' : 'none';
-                scrollRightBtn.style.display = (hasOverflow && !atEnd) ? 'flex' : 'none';
-            } else {
-                scrollLeftBtn.style.display = 'flex';
-                scrollRightBtn.style.display = 'flex';
-            }
-        }
     }
 
+    // ===== FUNÇÃO PARA SCROLL PARA O TAB SELECIONADO =====
     function scrollToTab(tab) {
         if (!tabsContainer || !tab) return;
-        
         const containerRect = tabsContainer.getBoundingClientRect();
         const tabRect = tab.getBoundingClientRect();
-        
         const isVisible = (
             tabRect.left >= containerRect.left &&
             tabRect.right <= containerRect.right
         );
-        
         if (!isVisible) {
             const scrollAmount = tab.offsetLeft - tabsContainer.offsetLeft - 20;
             tabsContainer.scrollTo({ left: scrollAmount, behavior: 'smooth' });
@@ -1493,6 +1562,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== EVENTOS =====
+
     // Clique nos tabs
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
@@ -1502,84 +1572,85 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Setas de navegação
-    if (scrollLeftBtn) {
-        scrollLeftBtn.addEventListener('click', () => scrollTabs(-1));
-    }
-    if (scrollRightBtn) {
-        scrollRightBtn.addEventListener('click', () => scrollTabs(1));
-    }
-
-    // Scroll com roda do mouse (horizontal)
-    if (tabsContainer) {
-        tabsContainer.addEventListener('wheel', function(e) {
-            if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                e.preventDefault();
-                const scrollAmount = e.deltaX || e.deltaY;
-                this.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    // Botão Anterior
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            if (currentChapter > 1) {
+                loadChapter(currentChapter - 1);
+                const prevTab = document.querySelector(`.tab-btn[data-chapter="${currentChapter}"]`);
+                if (prevTab) scrollToTab(prevTab);
             }
-        }, { passive: false });
-
-        // Drag to scroll
-        let isDown = false;
-        let startX = 0;
-        let scrollLeft = 0;
-
-        tabsContainer.addEventListener('mousedown', function(e) {
-            if (e.target.closest('.tab-btn')) return;
-            isDown = true;
-            this.style.cursor = 'grabbing';
-            startX = e.pageX - this.offsetLeft;
-            scrollLeft = this.scrollLeft;
         });
-
-        tabsContainer.addEventListener('mouseleave', function() {
-            isDown = false;
-            this.style.cursor = 'grab';
-        });
-
-        tabsContainer.addEventListener('mouseup', function() {
-            isDown = false;
-            this.style.cursor = 'grab';
-        });
-
-        tabsContainer.addEventListener('mousemove', function(e) {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - this.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            this.scrollLeft = scrollLeft - walk;
-        });
-
-        // Atualizar overflow
-        tabsContainer.addEventListener('scroll', checkOverflow);
     }
 
-    // Resize
-    window.addEventListener('resize', checkOverflow);
-    window.addEventListener('load', function() {
-        setTimeout(checkOverflow, 300);
+    // Botão Próximo
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            if (currentChapter < totalChapters) {
+                loadChapter(currentChapter + 1);
+                const nextTab = document.querySelector(`.tab-btn[data-chapter="${currentChapter}"]`);
+                if (nextTab) scrollToTab(nextTab);
+            }
+        });
+    }
+
+    // Botão Voltar ao Topo
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', scrollToTop);
+    }
+
+    // Clique nos dots de navegação
+    navDots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            loadChapter(index + 1);
+            const tab = document.querySelector(`.tab-btn[data-chapter="${index + 1}"]`);
+            if (tab) scrollToTab(tab);
+        });
     });
 
-    // ===== KEYBOARD SHORTCUTS =====
+    // Atalhos de teclado
     document.addEventListener('keydown', function(e) {
         const activeTab = document.querySelector('.tab-btn.active');
         if (!activeTab) return;
 
-        const tabsArray = Array.from(tabs);
-        const currentIndex = tabsArray.indexOf(activeTab);
-
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            const nextIndex = (currentIndex + 1) % tabsArray.length;
-            loadChapter(parseInt(tabsArray[nextIndex].dataset.chapter));
-            scrollToTab(tabsArray[nextIndex]);
+            if (currentChapter < totalChapters) {
+                loadChapter(currentChapter + 1);
+                const nextTab = document.querySelector(`.tab-btn[data-chapter="${currentChapter}"]`);
+                if (nextTab) scrollToTab(nextTab);
+            }
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            const prevIndex = (currentIndex - 1 + tabsArray.length) % tabsArray.length;
-            loadChapter(parseInt(tabsArray[prevIndex].dataset.chapter));
-            scrollToTab(tabsArray[prevIndex]);
+            if (currentChapter > 1) {
+                loadChapter(currentChapter - 1);
+                const prevTab = document.querySelector(`.tab-btn[data-chapter="${currentChapter}"]`);
+                if (prevTab) scrollToTab(prevTab);
+            }
+        } else if (e.key === 'Home') {
+            e.preventDefault();
+            scrollToTop();
         }
+    });
+
+    // ===== INICIALIZAÇÃO =====
+    initDragScroll();
+
+    window.addEventListener('resize', checkOverflow);
+    window.addEventListener('load', function() {
+        setTimeout(checkOverflow, 300);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
     });
 
     // ===== CARREGAR PRIMEIRO CAPÍTULO =====

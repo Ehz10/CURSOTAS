@@ -1,3 +1,4 @@
+<!-- index.html - Atualizado -->
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -6,112 +7,261 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudo TAS</title>
 
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
     <link rel="stylesheet" href="css/mainstyle.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
 <header>
-
     <div class="logo">
-
-        <img src="assets/logo.png" alt="Logo">
-
+        <div class="logo-icon pulse-icon">
+            <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+        </div>
         <h2>Estudo <span>TAS</span></h2>
-
     </div>
-    
 </header>
 
-
 <main>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">📚 Material de Estudo</div>
+            <h1>Manuais <span>TAS</span></h1>
+            <p>Acede a todos os manuais de formação para Tripulantes de Ambulância de Socorro. Material completo e atualizado para a sua preparação.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Manuais</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">66</span>
+                    <span class="stat-label">Capítulos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">📄</span>
+                    <span class="stat-label">PDF Original</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>Manuais TAS</h1>
+    <!-- ===== MANUAIS ===== -->
+    <section class="manuals-section">
+        <div class="section-header">
+            <h2>Manuais de Formação</h2>
+            <p>Seleciona o manual que pretendes estudar</p>
+        </div>
 
-<div class="cards">
+        <div class="cards">
+            <div class="card blue">
+                <div class="card-icon">
+                    <i class="fa-solid fa-house-medical"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Introdução à Emergência Pré-Hospitalar</h3>
+                    <p>9 capítulos</p>
+                </div>
+                <div class="card-actions">
+                    <a href="IEM.html" class="btn-study">Entrar <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
 
-    <div class="card blue">
+            <div class="card green">
+                <div class="card-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Abordagem da Vítima</h3>
+                    <p>5 capítulos</p>
+                </div>
+                <div class="card-actions">
+                    <a href="AV.html" class="btn-study">Entrar <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
 
-        <i class="fa-solid fa-house-medical"></i>
+            <div class="card orange">
+                <div class="card-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Emergências Médicas</h3>
+                    <p>23 capítulos</p>
+                </div>
+                <div class="card-actions">
+                    <a href="EM.html" class="btn-study">Entrar <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
 
-        <h3>Introdução à Emergência Pré-Hospitalar</h3>
+            <div class="card pink">
+                <div class="card-icon">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Emergências Pediátricas</h3>
+                    <p>11 capítulos</p>
+                </div>
+                <div class="card-actions">
+                    <a href="EP.html" class="btn-study">Entrar <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
 
-        <p>9 capítulos</p>
+            <div class="card red">
+                <div class="card-icon">
+                    <i class="fa-solid fa-truck-medical"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Emergências de Trauma</h3>
+                    <p>15 capítulos</p>
+                </div>
+                <div class="card-actions">
+                    <a href="ET.html" class="btn-study">Entrar <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
 
-        <a href="IEM.html">Entrar →</a>
+            <div class="card purple">
+                <div class="card-icon">
+                    <i class="fa-solid fa-person-pregnant"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Emergências de Obstetrícia</h3>
+                    <p>3 capítulos</p>
+                </div>
+                <div class="card-actions">
+                    <a href="EO.html" class="btn-study">Entrar <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <!-- ===== RECURSOS SECTION ===== -->
+    <section class="resources-section" id="recursos">
+        <div class="section-header">
+            <h2><i class="fa-solid fa-download"></i> Descarregar Manuais</h2>
+            <p>Manuais em formato PDF para estudo offline</p>
+        </div>
 
-    <div class="card green">
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Introdução à Emergência Pré-Hospitalar</h4>
+                    <span class="resource-size">9 capítulos</span>
+                </div>
+                <a href="pdfs/01_Introducao_a_Emergencia_Pre_Hospitalar.pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
 
-        <i class="fa-solid fa-user-doctor"></i>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Abordagem da Vítima</h4>
+                    <span class="resource-size">5 capítulos</span>
+                </div>
+                <a href="pdfs/02_Abordagem_da_Vitima.pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
 
-        <h3>Abordagem da Vítima</h3>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Emergências Médicas</h4>
+                    <span class="resource-size">23 capítulos</span>
+                </div>
+                <a href="pdfs/03_Emergencias_Medicas.pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
 
-        <p>5 capítulos</p>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Emergências de Obstetrícia</h4>
+                    <span class="resource-size">3 capítulos</span>
+                </div>
+                <a href="pdfs/04_Emergencias_de_Obstetricia.pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
 
-        <a href="AV.html">Entrar →</a>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Emergências Pediátricas</h4>
+                    <span class="resource-size">11 capítulos</span>
+                </div>
+                <a href="pdfs/05_Emergencias_Pediatricas.pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
 
-    </div>
-
-    <div class="card orange">
-
-        <i class="fa-solid fa-heart-pulse"></i>
-
-        <h3>Emergências Médicas</h3>
-
-        <p>23 capítulos</p>
-
-        <a href="EM.html">Entrar →</a>
-
-    </div>
-
-    <div class="card pink">
-
-        <i class="fa-solid fa-baby"></i>
-
-        <h3>Emergências Pediátricas</h3>
-
-        <p>11 capítulos</p>
-
-        <a href="EP.html">Entrar →</a>
-
-    </div>
-
-    <div class="card red">
-
-        <i class="fa-solid fa-truck-medical"></i>
-
-        <h3>Emergências de Trauma</h3>
-
-        <p>15 capítulos</p>
-
-        <a href="ET.html">Entrar →</a>
-
-    </div>
-
-    <div class="card purple">
-
-        <i class="fa-solid fa-person-pregnant"></i>
-
-        <h3>Emergências de Obstetrícia</h3>
-
-        <p>3 capítulos</p>
-
-        <a href="EO.html">Entrar →</a>
-
-    </div>
-
-</div>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Emergências de Trauma</h4>
+                    <span class="resource-size">15 capítulos</span>
+                </div>
+                <a href="pdfs/06_Emergencias_de_Trauma.pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="resource-info">
+                    <h4>Manual Completo</h4>
+                    <span class="resource-size">66 capítulos</span>
+                </div>
+                <a href="pdfs/MANUAL_TAS_V1_MAR24 (1).pdf" class="resource-download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 
 </main>
 
-</body>
+<footer class="page-footer">
+    <div class="footer-content">
+        <p><i class="fa-regular fa-copyright"></i> Estudo TAS - Material de apoio à formação</p>
+        <div class="footer-links">
+            <span>INEM</span>
+            <span>•</span>
+            <span>SIEM</span>
+            <span>•</span>
+            <span>Emergência Médica</span>
+        </div>
+        <button class="footer-top" id="backToTop" aria-label="Voltar ao topo">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+</footer>
 
+<!-- ===== SCRIPTS ===== -->
+<script src="js/index.js"></script>
+
+</body>
 </html>

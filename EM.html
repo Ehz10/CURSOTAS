@@ -1,4 +1,4 @@
-<!-- emergencias_medicas.html - Versão corrigida -->
+<!-- emergencias_medicas.html - Versão melhorada -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -14,36 +14,45 @@
 
 <header>
     <div class="logo">
-
-        <img src="assets/logo.png" alt="Logo">
-
+        <div class="logo-icon pulse-icon">
+            <img src="assets/logo.png" alt="Logo">
+        </div>
         <h2>Estudo <span>TAS</span></h2>
-
+    </div>
+    <div class="header-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Manual disponível</span>
     </div>
 </header>
 
 <main>
     <!-- ===== BREADCRUMB ===== -->
-    <div class="breadcrumb">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="index.html"><i class="fa-solid fa-house"></i> Início</a>
         <span class="separator">/</span>
         <span class="current">Emergências Médicas</span>
-    </div>
+        <span class="breadcrumb-progress">Capítulo 1 de 23</span>
+    </nav>
 
     <!-- ===== HEADER DO MANUAL ===== -->
     <div class="manual-header">
         <div class="header-content">
-            <div class="header-icon">
+            <div class="header-icon float-icon">
                 <i class="fa-solid fa-heart-pulse"></i>
             </div>
             <div>
+                <div class="header-badge">Manual TAS</div>
                 <h1>Emergências Médicas</h1>
                 <p class="manual-subtitle"><i class="fa-regular fa-file-lines"></i> Reconhecimento e atuação em situações pré-hospitalares agudas.</p>
                 <div class="header-meta">
                     <span><i class="fa-regular fa-circle-check"></i> 23 capítulos</span>
-                    <span><i class="fa-regular fa-clock"></i> Manual TAS</span>
+                    <span><i class="fa-regular fa-clock"></i> Última atualização: 2024</span>
+                    <span><i class="fa-regular fa-bookmark"></i> INEM</span>
                 </div>
             </div>
+        </div>
+        <div class="header-decoration">
+            <div class="decoration-bar"></div>
         </div>
     </div>
 
@@ -115,7 +124,9 @@
                 </button>
                 <button class="tab-btn" data-chapter="13">
                     <span class="tab-icon"><i class="fa-solid fa-person-pregnant"></i></span>
-                   </button>
+                    <span class="tab-label">Dor Abdominal</span>
+                    <span class="tab-badge">XIII</span>
+                </button>
                 <button class="tab-btn" data-chapter="14">
                     <span class="tab-icon"><i class="fa-solid fa-brain"></i></span>
                     <span class="tab-label">Neurológicas</span>
@@ -167,12 +178,9 @@
                     <span class="tab-badge">XXIII</span>
                 </button>
             </div>
-            <div class="tabs-nav-arrows left">
-                <button class="nav-arrow" id="scrollLeft"><i class="fa-solid fa-chevron-left"></i></button>
-            </div>
-            <div class="tabs-nav-arrows">
-                <button class="nav-arrow" id="scrollRight"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
+        </div>
+        <div class="tabs-progress">
+            <div class="tabs-progress-bar" id="tabsProgress" style="width: 4.35%"></div>
         </div>
     </div>
 
@@ -182,6 +190,26 @@
             <!-- Injetado pelo JavaScript -->
         </div>
     </div>
+
+    <!-- ===== NAVEGAÇÃO ENTRE CAPÍTULOS ===== -->
+    <div class="chapter-navigation">
+        <button class="nav-btn nav-prev" id="prevChapter" disabled>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Anterior</span>
+        </button>
+        <div class="nav-indicator">
+            <span class="nav-dot active"></span>
+            <span class="nav-dot"></span>
+            <span class="nav-dot"></span>
+            <span class="nav-dot"></span>
+            <span class="nav-dot"></span>
+        </div>
+        <button class="nav-btn nav-next" id="nextChapter">
+            <span>Próximo</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
 </main>
 
 <footer class="page-footer">
@@ -194,6 +222,9 @@
             <span>•</span>
             <span>Emergência Médica</span>
         </div>
+        <button class="footer-top" id="backToTop" aria-label="Voltar ao topo">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
     </div>
 </footer>
 
